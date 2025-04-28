@@ -4,7 +4,7 @@ const validateJWT = (req, res, next) => {
   const token = req.cookies.authToken;
   // console.log(req.cookies);
   if (!token) {
-    return res.json(false);
+    return res.json("Error con la petición");
   }
 
   try {
