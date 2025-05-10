@@ -18,7 +18,7 @@ router.post(
 
 router.post("/logout", (req, res) => {
   if (Object.keys(req.cookies).length == 0) {
-    return res.json(false);
+    return res.json("No existe una sesión para cerrar");
   }
   res.clearCookie("authToken", {
     httpOnly: true,
@@ -28,6 +28,6 @@ router.post("/logout", (req, res) => {
   res.json("Logout exitoso");
 });
 
-router.post("/verificar", [validateJWT], verificar);
+router.get("/verificar", [validateJWT], verificar);
 
 module.exports = router;

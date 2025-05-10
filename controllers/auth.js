@@ -13,7 +13,6 @@ async function Login(req, res) {
       .execute("[storejys].[dbo].[SP_STOREJYS_AuthUser]");
 
     const mensaje = resultado.recordset[0]?.Mensaje || "Usuario no encontrado";
-
     if (mensaje !== "Ingreso exitoso") {
       return res.status(401).json({ mensaje });
     }
@@ -42,7 +41,6 @@ async function Login(req, res) {
       maxAge: 60 * 60 * 1000, // 60 minutos
     });
 
-    //user = transformarDatos({ resultado: resultado.recordset }); /////////////////////////////////////////
     res.json(transformarDatos({ resultado: resultado.recordset }));
   } catch (error) {
     console.log(error);
@@ -51,7 +49,7 @@ async function Login(req, res) {
 }
 
 async function verificar(req, res) {
-  try {1
+  try {
     const token = req.cookies.authToken;
     if (!token) {
       res.clearCookie("authToken", {
@@ -73,11 +71,15 @@ async function verificar(req, res) {
     }
 
     const pool = await poolBDPromise; // Obtén el pool de la base de datos BD
+    // const resultado = await pool.request().query(`
+    //     select idUsuario,Nombre,Apellido,Celular,Cedula,Correo,Direccion,Barrio,Ciudad,Departamento
+    //     from [storejys].[dbo].[usuarios]
+    //     where idUsuario = ${decoded.uid.id}`);
     const resultado = await pool.request().query(`
-        select idUsuario,Nombre,Apellido,Celular,Cedula,Correo,Direccion,Barrio,Ciudad,Departamento
-        from [storejys].[dbo].[usuarios] 
-        where idUsuario = ${decoded.uid.id}`);
-    // console.log(resultado)
+            select Nombre,Apellido 
+            from [storejys].[dbo].[usuarios]
+            where idUsuario = ${decoded.uid.id}`);
+    // console.log(resultado.recordset[0])
     res.json({ usuario: resultado.recordset });
   } catch (error) {
     res.clearCookie("authToken", {
