@@ -23,7 +23,7 @@ router.post("/logout", (req, res) => {
   res.clearCookie("authToken", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production", // Solo HTTPS en producción
-    sameSite: "strict", // Ajusta según tus necesidades
+    sameSite: "Strict", // Ajusta según tus necesidades
   });
   res.json("Logout exitoso");
 });

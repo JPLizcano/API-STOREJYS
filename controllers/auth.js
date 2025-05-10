@@ -27,7 +27,6 @@ async function Login(req, res) {
       estado: usuario.Estado,
       nombre: usuario.Nombre,
       apellido: usuario.Apellido,
-      // doc: usuario.Cedula,
       menu,
     };
 
@@ -39,6 +38,7 @@ async function Login(req, res) {
       secure: process.env.NODE_ENV === "production", // Usar solo HTTPS en producción
       sameSite: "Strict", // Prevenir ataques CSRF
       maxAge: 60 * 60 * 1000, // 60 minutos
+      domain: "192.168.1.4",
     });
 
     res.json(transformarDatos({ resultado: resultado.recordset }));
@@ -55,7 +55,7 @@ async function verificar(req, res) {
       res.clearCookie("authToken", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // Solo HTTPS en producción
-        sameSite: "strict", // Ajusta según tus necesidades
+        sameSite: "Strict", // Ajusta según tus necesidades
       });
       return res.status(401).json({ mensaje: "Usuario no autenticado" });
     }
@@ -65,7 +65,7 @@ async function verificar(req, res) {
       res.clearCookie("authToken", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // Solo HTTPS en producción
-        sameSite: "strict", // Ajusta según tus necesidades
+        sameSite: "Strict", // Ajusta según tus necesidades
       });
       return res.status(401).json({ mensaje: "Usuario de token inválido" });
     }
@@ -85,7 +85,7 @@ async function verificar(req, res) {
     res.clearCookie("authToken", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Solo HTTPS en producción
-      sameSite: "strict", // Ajusta según tus necesidades
+      sameSite: "Strict", // Ajusta según tus necesidades
     });
     return res.status(401).json({ mensaje: "Token inválido o expirado" });
   }
