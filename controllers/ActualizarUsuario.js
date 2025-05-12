@@ -5,14 +5,14 @@ async function ActualizarUsuario(req, res) {
     // if (!req.cookies.modulos.includes("Cambio de contraseñas")) {
     //   return res.status(401).json(false);
     // }
-    console.log(req.uid.id)
+    // console.log(req.uid.id)
     const pool = await poolBDPromise; // Se obtiene el pool de la base de datos BD
     const resultado = await pool
       .request()
       .input("idSolicitud", sql.Int, req.uid.id)
       .input("Cedula", sql.VarChar, req.body.Cedula)
-      .input("Nombre", sql.VarChar, req.body.Nombre)
-      .input("Apellido", sql.VarChar, req.body.Apellido)
+      // .input("Nombre", sql.VarChar, req.body.Nombre)
+      // .input("Apellido", sql.VarChar, req.body.Apellido)
       .input("Celular", sql.VarChar, req.body.Celular)
       .input("Correo", sql.VarChar, req.body.Correo)
       .input("Direccion", sql.VarChar, req.body.Direccion)

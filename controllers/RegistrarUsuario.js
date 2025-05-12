@@ -24,7 +24,7 @@ async function RegistrarUsuario(req, res) {
     if (!resultado.recordset || Object.keys(resultado.recordset).length == 0) {
       resultado.recordset = "empty";
     }
-
+    
     res.json(resultado.recordsets);
   } catch (error) {
     console.log(error);

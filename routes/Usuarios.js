@@ -11,7 +11,7 @@ const router = Router();
 
 router.get("/Listar", [validateJWT], ListarUsuarios);
 
-router.get(
+router.post(
   "/Buscar",
   [validateJWT, check("idUsuario", "El usuario es obligatorio.").not().isEmpty(), validarCampos],
   BuscarUsuariosByID

@@ -12,11 +12,11 @@ async function Login(req, res) {
       .input("Clave", sql.VarChar, req.body.Clave)
       .execute("[storejys].[dbo].[SP_STOREJYS_AuthUser]");
 
+    // console.log(resultado);
     const mensaje = resultado.recordset[0]?.Mensaje || "Usuario no encontrado";
     if (mensaje !== "Ingreso exitoso") {
       return res.status(401).json({ mensaje });
     }
-
     const usuario = resultado.recordset[0];
     const menu = usuario.Menu ? usuario.Menu.split(",").map(Number) : [];
 
@@ -76,7 +76,7 @@ async function verificar(req, res) {
     //     from [storejys].[dbo].[usuarios]
     //     where idUsuario = ${decoded.uid.id}`);
     const resultado = await pool.request().query(`
-            select Nombre,Apellido 
+            select idUsuario,Nombre,Apellido 
             from [storejys].[dbo].[usuarios]
             where idUsuario = ${decoded.uid.id}`);
     // console.log(resultado.recordset[0])
