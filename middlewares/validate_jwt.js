@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const validateJWT = (req, res, next) => {
   try {
     const token = req.cookies.authToken;
-
     if (!token) {
       return res.json("Error con la petición");
     }
