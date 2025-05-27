@@ -4,7 +4,7 @@ const { validarCampos } = require("../middlewares/validarCampos");
 const { validateJWT } = require("../middlewares/validate_jwt");
 const { RegistrarProducto } = require("../controllers/RegistrarProducto");
 const { ActualizarProducto } = require("../controllers/ActualizarProducto");
-const { ListarProductos, ListaTipos } = require("../controllers/ListarProductos");
+const { ListarProductos, ListaTipos, ListarPorProducto } = require("../controllers/ListarProductos");
 const multer = require("multer");
 // const { validatePermission } = require("../middlewares/permissions");
 
@@ -15,6 +15,7 @@ const router = Router();
 
 router.get("/Listar", ListarProductos);
 router.get("/ListarTipos", ListaTipos);
+router.get("/Categoria/:categoria", ListarPorProducto);
 
 router.post(
   "/Registrar",
